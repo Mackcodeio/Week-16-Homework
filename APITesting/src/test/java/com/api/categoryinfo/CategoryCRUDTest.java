@@ -1,4 +1,4 @@
-package com.api.category;
+package com.api.categoryinfo;
 
 import com.api.model.Category;
 import com.api.model.CategoryPath;

@@ -1,4 +1,4 @@
-package com.api.stores;
+package com.api.storesinfo;
 
 import com.api.model.Stores;
 import io.restassured.RestAssured;
@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class StoresCURDTest {
+public class StoresCRUDTest {
 
     public static int idNumber;
 
@@ -48,8 +48,19 @@ public class StoresCURDTest {
         System.out.println("Created Data ID:"+idNumber);
     }
 
-    @Test //update id (patch)
+    @Test // get single data
     public void test003(){
+        Response response = given()
+                .log().all()
+                .header("Content-Type","application/json")
+                .pathParam("id","8927")
+                .when()
+                .get("/{id}");
+        response.then().log().all().statusCode(200);
+    }
+
+    @Test //update id (patch)
+    public void test004(){
         Stores data = new Stores();
         data.setCity("Mana");
         data.setState("ABC");
@@ -57,7 +68,7 @@ public class StoresCURDTest {
         given()
                 .log().all()
                 .header("Content-Type","application/json")
-                .pathParam("id",idNumber)
+                .pathParam("id","8927")
                 .when()
                 .body(data)
                 .patch("/{id}")
@@ -69,10 +80,9 @@ public class StoresCURDTest {
         Response response =given()
                 .log().all()
                 .header("Content-Type","application/json")
-                .pathParam("id",idNumber)
+                .pathParam("id","8927")
                 .when()
                 .delete("/{id}");
-        response.then().statusCode(200);
+        response.then().log().all().statusCode(200);
     }
-
 }

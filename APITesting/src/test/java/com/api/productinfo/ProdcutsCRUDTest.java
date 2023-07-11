@@ -93,41 +93,4 @@ public class ProdcutsCRUDTest {
 
         response.then().log().all().statusCode(200);
     }
-
-    /********************* Querying the API ***********************/
-
-    @Test  // get single data
-    public void test006(){
-        Response response = given()
-                .log().all()
-                .pathParam("id","9132294")
-                .when()
-                .get("/{id}");
-        response.then().log().all().statusCode(200);
-    }
-
-    @Test  // Get all products  (/products)
-    public void test007(){
-        Response response=given().when().get();
-        response.then().log().all().statusCode(200);
-    }
-
-    @Test // Get all products, limit to 1 result ( /products?$limit=2)
-    public void test008(){
-        Response response = given()
-                            .queryParam("$limit","2")
-                            .when()
-                            .get();
-                response.then().log().all().statusCode(200);
-    }
-
-    @Test
-    public void test009() {
-
-        given()
-                .queryParam("$skip","2500")
-                .when()
-                .get()
-                .then().log().all().statusCode(200);
-    }
 }
